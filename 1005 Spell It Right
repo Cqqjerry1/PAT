@@ -1,0 +1,29 @@
+https://pintia.cn/problem-sets/994805342720868352/problems/994805519074574336
+
+解题思路:以字符串的形式读入整数，把每个字符取出来进行相加的和记为sum，在创建一个字符数组0-9的对应的英文数组，把sum的每一位取出来，对应的字符串数组输出。
+
+import java.util.Scanner;
+
+public class Main {
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		String[] str = {"zero","one","two","three","four","five",
+			"six","seven","eight","nine"};
+		
+		String nums = sc.nextLine();
+		int sum = 0;
+		
+		for(int i=0; i< nums.length(); i++) {
+			sum = sum +(nums.charAt(i)-'0');
+		}
+		
+		String s = String.valueOf(sum);
+		for(int i=0; i<s.length(); i++) {
+			if(i == s.length()-1){
+				System.out.print(str[(s.charAt(i)-'0')]);
+			}
+			else
+				System.out.print(str[(s.charAt(i)-'0')] +" ");
+		}
+	}
+}
