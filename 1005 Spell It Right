@@ -2,6 +2,7 @@ https://pintia.cn/problem-sets/994805342720868352/problems/994805519074574336
 
 解题思路:以字符串的形式读入整数，把每个字符取出来进行相加的和记为sum，在创建一个字符数组0-9的对应的英文数组，把sum的每一位取出来，对应的字符串数组输出。
 
+代码：
 import java.util.Scanner;
 
 public class Main {
