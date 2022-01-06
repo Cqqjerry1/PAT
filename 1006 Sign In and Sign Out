@@ -1,0 +1,64 @@
+https://pintia.cn/problem-sets/994805342720868352/problems/994805516654460928
+
+解题思路：创建一个类，存入ID_number、 Sign_in_time 、Sign_out_time，然后分别对Sign_in_time和Sign_out_time进行从小到大排序和从大到小排序，即可得出每天开门和关门人的ID_number
+
+代码：
+import java.util.*;
+
+public class Main {
+
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		int M;
+		M = sc.nextInt();
+		Members[] members = new Members[M];
+		for(int i=0; i<M; i++) {
+			String ID = sc.next();
+			String in_time = sc.next();
+			String out_time = sc.next();
+			members[i] = new Members(ID, in_time, out_time);
+		}
+		//Members[] members1 = members;
+		
+		Comparator<Members> com1 = new Comparator<Members>(){
+
+			@Override
+			public int compare(Members o1, Members o2) {
+				return o1.Sign_in_time.compareTo(o2.Sign_in_time);
+			}
+			
+		};
+		Arrays.sort(members,com1 );
+		Members m1 = members[0];
+		
+		Comparator<Members> com2 = new Comparator<Members>() {
+
+			@Override
+			public int compare(Members o1, Members o2) {
+				// TODO Auto-generated method stub
+				return -(o1.Sign_out_time.compareTo(o2.Sign_out_time));
+			}
+			
+		};
+		
+		Arrays.sort(members,com2 );
+		Members m2 = members[0];
+		
+		System.out.print(m1.ID_number+" "+m2.ID_number);
+	}
+
+}
+
+class Members{
+	public String ID_number;
+	public String Sign_in_time;
+	public String Sign_out_time;
+	public Members(String iD_number, String sign_in_time, String sign_out_time) {
+		super();
+		ID_number = iD_number;
+		Sign_in_time = sign_in_time;
+		Sign_out_time = sign_out_time;
+	}
+	
+	
+}
