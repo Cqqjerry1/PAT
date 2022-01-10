@@ -1,0 +1,33 @@
+题目链接：https://pintia.cn/problem-sets/994805342720868352/problems/994805429018673152
+
+解题思路：首先定义一个map,用来存储是否存在str2中的字符，然后遍历str1，判断是否存在于map中，若不存在，将其加入到结果str中。
+
+代码：
+import java.io.*;
+import java.util.*;
+
+public class Main {
+
+    public static void main(String[] args) throws IOException {
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));;
+        String str1, str2;
+        //输入两个字符串
+        str1 = reader.readLine();
+        str2 = reader.readLine();
+
+        //用来记录结果
+        StringBuilder str = new StringBuilder();
+        Hashtable<Character,Integer> map = new Hashtable<>();
+
+        //用set集合存储str2
+        for(int i=0; i<str2.length(); i++)
+            map.put(str2.charAt(i),1);
+
+         for(int i=0; i<str1.length(); i++)
+            if(!map.containsKey(str1.charAt(i)))//判断str1中的每个字符是否在str2中
+                str.append(str1.charAt(i));
+
+        System.out.print(str);
+    }
+
+}
