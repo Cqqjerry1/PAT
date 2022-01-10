@@ -1,0 +1,52 @@
+题目链接：https://pintia.cn/problem-sets/994805342720868352/problems/994805398257647616
+
+解题思路：首先创建String[] str = br.readLine().toLowerCase().replaceAll("[^a-z0-9]+", " ").split("\\s+");单词数组，然后创建HashMap，
+读入每个单词出现的次数，记录最大次数maxCounts，最后遍历HashMap，将出现次数等于maxCounts的存入List集合中，再对List集合进行排序。
+
+代码：
+import java.io.*;
+import java.util.*;
+
+public class Main {
+
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        String[] str = br.readLine().toLowerCase().
+                replaceAll("[^a-z0-9]+", " ").split("\\s+");
+        HashMap<String, Integer> wordCounts = new HashMap<String, Integer>();
+        int count = 0, maxCounts = 0;
+        for(int i=0; i<str.length; i++) {
+            if(wordCounts.containsKey(str[i])) {
+                count = wordCounts.get(str[i])+1;
+                wordCounts.put(str[i], count);
+                if(count>maxCounts) {
+                    maxCounts = count;
+                }
+            }else {
+                wordCounts.put(str[i], 1);
+                if(1>maxCounts) {
+                    maxCounts = 1;
+                }
+            }
+        }
+
+        Set<String> keSet = wordCounts.keySet();
+        ArrayList<String> resultWord = new ArrayList<>();
+        for(String key : keSet) {
+            if(wordCounts.get(key) == maxCounts) {
+                resultWord.add(key);
+            }
+        }
+
+        Collections.sort(resultWord, new Comparator<String>() {
+
+            @Override
+            public int compare(String o1, String o2) {
+                return o1.compareTo(o2);
+            }
+        });
+
+        System.out.println(resultWord.get(0)+" "+maxCounts);
+    }
+
+}
