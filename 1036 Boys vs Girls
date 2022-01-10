@@ -1,0 +1,81 @@
+题目链接：https://pintia.cn/problem-sets/994805342720868352/problems/994805453203030016
+
+解题思路：定义一个类Student存储name, gender, ID和 grade，读入信息后，分别统计男生女生的个数，然后对students数组进行排序(按照性别和分数),就可得出女生的最高成绩和男生的最低成绩。
+
+代码：
+import java.util.*;
+
+public class Main {
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int N;//总人数
+        int countF = 0;//记录女生人数
+        int countM = 0;//记录男生人数
+        N = sc.nextInt();
+        Students[] students = new Students[N];
+        //读入学生信息
+        for(int i=0; i<N; i++) {
+            String nam = sc.next();
+            String gen = sc.next();
+            String id = sc.next();
+            int grade1 = sc.nextInt();
+            if(gen.equals("F")) {
+                countF++;
+                students[i] = new Students(nam,gen,id,grade1);
+            }else {
+                countM++;
+                students[i] = new Students(nam,gen,id,grade1);
+            }
+        }
+        //对输入的学生排序，按照性别和成绩排序
+        Comparator<Students> com1 = new Comparator<Students>() {
+
+            @Override
+            public int compare(Students o1, Students o2) {
+                if(o1.gender.compareTo(o2.gender) == 0)
+                    return -(Integer.compare(o1.grade, o2.grade));
+                else
+                    return o1.gender.compareTo(o2.gender);
+            }
+
+        };
+
+        Arrays.sort(students,com1);
+
+        //数组中第一条信息就为女生成绩最高的
+        if(countF == 0) {
+            System.out.println("Absent");
+        }else {
+            System.out.println(students[0].name+" "+students[0].ID);
+        }
+        //数组中最后一条信息就为男生成绩最低的
+        if(countM == 0) {
+            System.out.println("Absent");
+        }else {
+
+            System.out.println(students[N-1].name+" "+students[N-1].ID);
+        }
+
+        if(countM == 0 || countF == 0) {
+            System.out.print("NA");
+        }else {
+            System.out.print(students[0].grade - students[N-1].grade);
+        }
+    }
+
+}
+
+class Students {
+    public String name;//姓名
+    public String gender;//性别
+    public String ID; //编号
+    public int grade;
+    public Students(String name, String gender, String iD, int grade) {
+        super();
+        this.name = name;
+        this.gender = gender;
+        ID = iD;
+        this.grade = grade;
+    }
+}
